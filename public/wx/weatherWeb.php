@@ -8,11 +8,7 @@ $signPackage = $jssdk->GetSignPackage();
 <head>
   <meta charset="UTF-8">
   <title></title>
-</head>
-<body>
-  
-</body>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
   /*
    * 注意：
@@ -52,7 +48,54 @@ $signPackage = $jssdk->GetSignPackage();
                 var speed = res.speed; // 速度，以米/每秒计
                 var accuracy = res.accuracy; // 位置精度
                 alert("latitude:" + latitude + "longitude:" + longitude);
-                openLocation();
+              
+
+                
+                //var script = document.createElement('script');
+                //script.setAttribute("type","text/javascript");
+                //script.src = "http://api.map.baidu.com/geocoder?location=38.990998,103.645966&output=json&key=fjDkD13i9PWIGOfmgMTBzdVEbN05LG2G&callback=abc";
+                //script.src = "http://140.143.30.100/wx/test2.json&callback=abc";
+                /*script.onload = script.onreadystatechange = function() {
+                   alert("aaa");
+                     if (request.readyState == 4) {
+                        alert(request.status);
+                        if (request.status == 200) {
+                            var response = request.responseXML;
+                            var city = response.getElementsByTagName('city')[0].textContent; 
+                            alert(city);
+                        } else {
+                            //alert("aaa");
+                        }
+                    } else {
+                        //alert("ccc");
+                    }
+                };*/
+                //document.head.appendChild(script);
+                
+                
+                var request = new XMLHttpRequest();
+                var postStr = String(latitude) + "," + String(longitude);
+                var data = "location=" + postStr; 
+                
+                request.onreadystatechange = function() {
+                    if (request.readyState == 4) {
+                        if (request.status == 200) {
+                            var response = request.responseText;
+                            var div = document.createElement('div');
+                            var p = document.createElement('p');
+                            p.innerHTML = response;
+                            div.appendChild(p);
+                            document.body.appendChild(div);
+                        } else {
+                        }
+                    } else {
+                    }
+                }
+                //request.open('GET', "http://api.map.baidu.com/geocoder?location=38.990998,103.645966&output=xml&key=fjDkD13i9PWIGOfmgMTBzdVEbN05LG2G", true);
+                request.open('POST', "apiServer.php", true);
+                request.setRequestHeader("Content-Type","application/x-www-form-urlencoded;");
+                request.send(data);
+                
             }
         });
     });
@@ -82,5 +125,27 @@ $signPackage = $jssdk->GetSignPackage();
             });
         });
     }
+  
+    /*function loadScript(url, func) {
+        //var head = document.head || document.getElementByTagName('head')[0];
+        var script = document.createElement('script');
+        script.setAttribute("type","text/javascript");
+        script.src = url;
+        
+        script.onload = script.onreadystatechange = function(){
+              alert(this.readyState);
+             if(!this.readyState || this.readyState=='loaded' || this.readyState=='complete'){
+                 func();
+                 script.onload = script.onreadystatechange = null;
+             }
+        };
+        head.insertBefore(script, 0);
+    }*/
+  
 </script>
+</head>
+<body>
+  
+</body>
+
 </html>

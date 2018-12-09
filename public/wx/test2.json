@@ -1,0 +1,21 @@
+{
+    "status":"OK",
+    "result":{
+        "location":{
+            "lng":103.645966,
+            "lat":38.990998
+        },
+        "formatted_address":"甘肃省武威市民勤县",
+        "business":"",
+        "addressComponent":{
+            "city":"武威市",
+            "direction":"",
+            "distance":"",
+            "district":"民勤县",
+            "province":"甘肃省",
+            "street":"",
+            "street_number":""
+        },
+        "cityCode":118
+    }
+}
